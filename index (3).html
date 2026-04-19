@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legallier — Derecho Corporativo & Propiedad Intelectual</title>
+  <meta name="description" content="Legallier. Firma boutique de derecho corporativo y propiedad intelectual en México. Marcas, patentes, M&A, contratos y litigio de PI. Monterrey · CDMX.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       VARIABLES & RESET
+    ============================================ */
+    :root {
+      --ink:         #0C0B09;
+      --ink-mid:     #2E2D2A;
+      --ink-soft:    #6B6A65;
+      --paper:       #F7F6F2;
+      --paper-d:     #EEECE6;
+      --white:       #FFFFFF;
+      --teal:        #00C9A7;
+      --teal-dark:   #00A88C;
+      --teal-pale:   #E6FAF6;
+      --teal-glow:   rgba(0,201,167,0.15);
+      --border:      #E2E0D8;
+      --border-dark: rgba(255,255,255,0.08);
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-ui:      'Syne', system-ui, sans-serif;
+
+      --max-w:   1200px;
+      --py:      130px;
+      --ease:    cubic-bezier(0.16, 1, 0.3, 1);
+      --tr:      0.4s var(--ease);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-ui);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      cursor: default;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================
+       UTILITIES
+    ============================================ */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 52px;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 24px;
+    }
+    .eyebrow::before {
+      content: ''; width: 24px; height: 2px;
+      background: var(--teal); border-radius: 1px;
+    }
+    .eyebrow.light { color: var(--teal); }
+    .eyebrow.light::before { background: var(--teal); }
+    .eyebrow.dark-bg { color: var(--teal); }
+
+    .display-title {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .display-title em { font-style: italic; font-weight: 300; color: var(--teal-dark); }
+    .display-title strong { font-weight: 700; }
+    .display-title.on-dark { color: var(--white); }
+    .display-title.on-dark em { color: var(--teal); }
+
+    .body-text {
+      font-size: 16px; font-weight: 400;
+      color: var(--ink-soft); line-height: 1.8;
+      margin-top: 18px;
+    }
+
+    /* Buttons */
+    .btn-ink {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--ink); color: var(--white);
+      padding: 14px 30px; font-family: var(--font-ui);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      border: none; border-radius: 2px; cursor: pointer;
+      transition: background var(--tr), transform 0.2s;
+    }
+    .btn-ink:hover { background: var(--ink-mid); transform: translateY(-1px); }
+
+    .btn-teal {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--teal); color: var(--ink);
+      padding: 14px 30px; font-family: var(--font-ui);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      border-radius: 2px; cursor: pointer; transition: var(--tr);
+    }
+    .btn-teal:hover { background: var(--teal-dark); color: var(--white); }
+
+    .btn-ghost-dark {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--white);
+      padding: 13px 28px; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 2px; cursor: pointer; transition: var(--tr);
+    }
+    .btn-ghost-dark:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 52px;
+      transition: background 0.4s, border-bottom 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(12,11,9,0.96);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.03em; color: var(--white);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nav-wordmark .teal-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--teal); display: inline-block;
+      margin-bottom: 2px; flex-shrink: 0;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--teal) !important; color: var(--ink) !important;
+      padding: 8px 18px !important; border-radius: 2px !important;
+      font-weight: 700 !important; transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--teal-dark) !important; color: var(--white) !important; }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: white; }
+
+    .mobile-nav {
+      display: none; position: fixed;
+      top: 66px; left: 0; right: 0;
+      background: var(--ink);
+      padding: 16px 28px 28px; z-index: 99;
+      flex-direction: column; gap: 2px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 14px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ============================================
+       HERO — FULL DARK EDITORIAL
+    ============================================ */
+    #hero {
+      background: var(--ink);
+      min-height: 100vh;
+      padding-top: 66px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Teal gradient glow */
+    .hero-glow {
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(0,201,167,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -300px; left: -300px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,201,167,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Hero grid lines */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* Top strip: location/firm info */
+    .hero-top-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 52px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      position: relative; z-index: 1;
+    }
+    .htb-left {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+    .htb-right {
+      display: flex; align-items: center; gap: 24px;
+    }
+    .htb-pill {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.35);
+    }
+    .htb-pill.active {
+      background: var(--teal-glow);
+      border-color: rgba(0,201,167,0.3);
+      color: var(--teal);
+    }
+
+    /* Main hero content */
+    .hero-main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 52px;
+      gap: 60px;
+      position: relative; z-index: 1;
+    }
+
+    .hero-left { padding: 60px 0; }
+
+    /* Big L wordmark accent */
+    .hero-l-mark {
+      position: absolute;
+      top: 60px; left: 52px;
+      font-family: var(--font-display);
+      font-size: 400px; font-weight: 700;
+      line-height: 1;
+      color: rgba(255,255,255,0.015);
+      pointer-events: none; user-select: none;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-tagline {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 32px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-tagline::before {
+      content: ''; width: 20px; height: 1.5px;
+      background: var(--teal); flex-shrink: 0;
+    }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6.5vw, 90px);
+      font-weight: 300;
+      line-height: 0.97;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+    .hero-heading em {
+      font-style: italic; display: block;
+      color: var(--teal);
+    }
+    .hero-heading strong {
+      font-weight: 700; display: block;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-desc {
+      font-size: 16px; font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.8; max-width: 420px;
+      margin-bottom: 44px;
+    }
+
+    .hero-btns { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+    .hero-kpis {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; gap: 44px;
+    }
+    .hkpi-val {
+      font-family: var(--font-display);
+      font-size: 40px; font-weight: 300; letter-spacing: -0.04em;
+      color: var(--white); line-height: 1;
+    }
+    .hkpi-val span { color: var(--teal); }
+    .hkpi-label { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 5px; letter-spacing: 0.04em; }
+    .hkpi-sep { width: 1px; height: 48px; background: rgba(255,255,255,0.07); align-self: center; }
+
+    /* Hero right: IP Portfolio mockup */
+    .hero-right { padding: 60px 0; display: flex; justify-content: center; }
+
+    .ip-mockup {
+      width: 100%; max-width: 480px;
+      background: #131312;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+      box-shadow:
+        0 60px 120px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 0 80px rgba(0,201,167,0.05);
+      animation: heroFloat 8s ease-in-out infinite;
+    }
+    @keyframes heroFloat {
+      0%,100% { transform: perspective(1200px) rotateY(-3deg) rotateX(1deg) translateY(0); }
+      50%      { transform: perspective(1200px) rotateY(-3deg) rotateX(1deg) translateY(-12px); }
+    }
+
+    .ipm-header {
+      background: #0C0C0B;
+      padding: 14px 20px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .ipm-dots { display: flex; gap: 6px; }
+    .ipm-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .ipm-search {
+      flex: 1; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px; height: 24px;
+      display: flex; align-items: center; padding: 0 10px;
+    }
+    .ipm-search::before {
+      content: 'legallier.mx · IP Portfolio';
+      font-size: 9px; color: rgba(255,255,255,0.2); font-family: monospace;
+    }
+    .ipm-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--teal); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .ipm-avatar span { font-size: 9px; font-weight: 800; color: var(--ink); font-family: var(--font-ui); }
+
+    .ipm-body { display: grid; grid-template-columns: 160px 1fr; min-height: 340px; }
+
+    .ipm-sidebar {
+      background: rgba(0,0,0,0.2);
+      border-right: 1px solid rgba(255,255,255,0.04);
+      padding: 18px 14px;
+    }
+    .ipm-logo-mark {
+      width: 32px; height: 32px; background: var(--teal);
+      border-radius: 4px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ipm-logo-mark span {
+      font-family: var(--font-display); font-size: 14px;
+      font-weight: 700; color: var(--ink);
+    }
+    .ipm-nav-row {
+      display: flex; align-items: center; gap: 7px;
+      padding: 7px 6px; border-radius: 5px; margin-bottom: 2px;
+    }
+    .ipm-nav-row.active { background: rgba(0,201,167,0.12); }
+    .ipm-nav-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+    .ipm-nav-row.active .ipm-nav-dot { background: var(--teal); }
+    .ipm-nav-line { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.08); flex: 1; }
+    .ipm-nav-row.active .ipm-nav-line { background: rgba(0,201,167,0.5); }
+
+    .ipm-main { padding: 18px; }
+    .ipm-section-label { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.1); width: 50%; margin-bottom: 12px; }
+    .ipm-section-teal { height: 4px; border-radius: 2px; background: var(--teal); width: 30%; margin-bottom: 14px; }
+
+    .ipm-cards { display: flex; flex-direction: column; gap: 8px; }
+    .ipm-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px; padding: 10px 12px;
+    }
+    .ipm-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
+    .ipm-card-icon { width: 22px; height: 22px; border-radius: 5px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .ipm-card-badge { font-size: 8px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 10px; }
+    .ipm-card-lines { display: flex; flex-direction: column; gap: 4px; }
+    .ipm-card-line { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.1); }
+
+    .ipm-progress-row { margin-top: 14px; }
+    .ipm-progress-label { display: flex; justify-content: space-between; margin-bottom: 5px; }
+    .ipm-progress-label span { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.1); }
+    .ipm-bar { height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; margin-bottom: 5px; overflow: hidden; }
+    .ipm-bar-fill { height: 100%; border-radius: 2px; }
+
+    /* Floating badges on hero */
+    .hero-float-badge {
+      position: absolute;
+      background: #1A1A18;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 14px 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .hfb-tl {
+      top: 30px; left: -30px;
+      animation: fbFloat1 9s ease-in-out infinite;
+    }
+    @keyframes fbFloat1 {
+      0%,100% { transform: rotate(-2deg) translateY(0); }
+      50%      { transform: rotate(-2deg) translateY(-8px); }
+    }
+    .hfb-br {
+      bottom: 20px; right: -20px;
+      animation: fbFloat2 10s ease-in-out infinite 1s;
+    }
+    @keyframes fbFloat2 {
+      0%,100% { transform: rotate(1.5deg) translateY(0); }
+      50%      { transform: rotate(1.5deg) translateY(-7px); }
+    }
+    .hfb-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 5px; }
+    .hfb-val { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: var(--white); line-height: 1; }
+    .hfb-teal { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--teal); line-height: 1; }
+    .hfb-sub { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 4px; }
+    .hfb-badge {
+      display: inline-flex; align-items: center; gap: 4px; margin-top: 8px;
+      font-size: 10px; font-weight: 700; color: var(--teal);
+      background: var(--teal-glow); padding: 3px 8px; border-radius: 10px;
+    }
+
+    /* Hero bottom: marquee strip */
+    .hero-marquee-strip {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 52px;
+      overflow: hidden; position: relative; z-index: 1;
+    }
+    .marquee-track {
+      display: flex; gap: 48px;
+      animation: marqueeScroll 25s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      display: flex; align-items: center; gap: 20px;
+      white-space: nowrap;
+    }
+    .marquee-item::after {
+      content: '·'; color: var(--teal); font-size: 18px;
+    }
+
+    /* ============================================
+       CAPABILITIES BAR
+    ============================================ */
+    #capabilities {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .cap-item {
+      padding: 40px 40px;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 14px;
+      transition: background var(--tr);
+      position: relative; overflow: hidden;
+    }
+    .cap-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--teal);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--tr);
+    }
+    .cap-item:hover::before { transform: scaleX(1); }
+    .cap-item:hover { background: var(--paper); }
+    .cap-item:last-child { border-right: none; }
+    .cap-num {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.2em; color: var(--teal);
+      text-transform: uppercase;
+    }
+    .cap-title {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 400; color: var(--ink);
+    }
+    .cap-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+
+    /* ============================================
+       FIRMA (ABOUT)
+    ============================================ */
+    #firma {
+      padding: var(--py) 0;
+      background: var(--paper);
+    }
+    #firma .container {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 120px; align-items: start;
+    }
+
+    .firma-content {}
+
+    .firma-body { font-size: 16px; font-weight: 400; color: var(--ink-soft); line-height: 1.85; margin-top: 22px; }
+
+    .firma-numbers {
+      margin-top: 48px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .fn-box {
+      background: var(--paper);
+      padding: 28px 24px;
+      transition: background var(--tr);
+    }
+    .fn-box:hover { background: var(--white); }
+    .fn-num {
+      font-family: var(--font-display);
+      font-size: 48px; font-weight: 300;
+      letter-spacing: -0.04em;
+      color: var(--ink); line-height: 1;
+    }
+    .fn-num span { color: var(--teal); }
+    .fn-label { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-soft); margin-top: 6px; }
+
+    /* Team / Partners */
+    .firma-team { display: flex; flex-direction: column; gap: 28px; }
+
+    .partner-card {
+      display: grid; grid-template-columns: 100px 1fr;
+      gap: 24px; align-items: start;
+      padding: 28px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color var(--tr), box-shadow var(--tr), transform var(--tr);
+    }
+    .partner-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 8px 32px rgba(0,201,167,0.08);
+      transform: translateX(4px);
+    }
+    .partner-photo-wrap { position: relative; }
+    .partner-photo {
+      width: 100px; height: 120px;
+      object-fit: cover; object-position: top;
+      display: block; border-radius: 4px;
+      filter: grayscale(15%);
+    }
+    .partner-badge {
+      position: absolute; bottom: -8px; left: -8px;
+      background: var(--teal); color: var(--ink);
+      font-size: 9px; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 8px; border-radius: 2px;
+    }
+    .partner-info {}
+    .partner-name {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 500;
+      color: var(--ink); margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .partner-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .partner-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+    .partner-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .partner-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 3px 8px;
+      background: var(--paper); border: 1px solid var(--border);
+      border-radius: 2px; color: var(--ink-soft);
+    }
+
+    /* ============================================
+       SERVICIOS — DARK EDITORIAL GRID
+    ============================================ */
+    #servicios {
+      padding: var(--py) 0;
+      background: var(--ink);
+      position: relative; overflow: hidden;
+    }
+
+    .servicios-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(0,201,167,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .servicios-top {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: end;
+      margin-bottom: 60px;
+      position: relative; z-index: 1;
+    }
+
+    .srv-mega-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 4px; overflow: hidden;
+      position: relative; z-index: 1;
+    }
+
+    .srv-item {
+      background: rgba(255,255,255,0.02);
+      padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: background var(--tr);
+      cursor: default;
+    }
+    .srv-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--teal);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+    .srv-item:hover { background: rgba(0,201,167,0.04); }
+    .srv-item:hover::before { transform: scaleX(1); }
+
+    .srv-item.featured {
+      background: rgba(0,201,167,0.07);
+      border: 1px solid rgba(0,201,167,0.15);
+      grid-column: span 2;
+    }
+    .srv-item.featured::before { display: none; }
+
+    .srv-item-num {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.2em; color: rgba(0,201,167,0.5);
+      margin-bottom: 18px;
+    }
+    .srv-item.featured .srv-item-num { color: var(--teal); }
+
+    .srv-item-icon {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      transition: var(--tr);
+    }
+    .srv-item-icon svg { color: rgba(255,255,255,0.35); transition: color var(--tr); }
+    .srv-item:hover .srv-item-icon {
+      border-color: rgba(0,201,167,0.4);
+      background: rgba(0,201,167,0.08);
+    }
+    .srv-item:hover .srv-item-icon svg { color: var(--teal); }
+    .srv-item.featured .srv-item-icon {
+      border-color: rgba(0,201,167,0.3);
+      background: rgba(0,201,167,0.1);
+    }
+    .srv-item.featured .srv-item-icon svg { color: var(--teal); }
+
+    .srv-item-name {
+      font-family: var(--font-display);
+      font-size: 19px; font-weight: 400;
+      color: var(--white); margin-bottom: 10px; line-height: 1.2;
+    }
+    .srv-item.featured .srv-item-name { font-size: 26px; }
+    .srv-item-desc {
+      font-size: 13px; font-weight: 400;
+      color: rgba(255,255,255,0.35); line-height: 1.75;
+    }
+    .srv-item.featured .srv-item-desc { color: rgba(255,255,255,0.5); font-size: 14px; }
+
+    /* ============================================
+       PROCESO — SPLIT DARK/LIGHT
+    ============================================ */
+    #proceso {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    .proceso-left {
+      background: var(--paper-d);
+      padding: 100px 60px;
+    }
+    .proceso-right {
+      background: var(--white);
+      padding: 100px 60px;
+    }
+
+    .step-list { margin-top: 48px; display: flex; flex-direction: column; gap: 32px; }
+    .step-row {
+      display: flex; gap: 20px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-idx {
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 300;
+      color: var(--teal); min-width: 28px;
+      padding-top: 3px;
+    }
+    .step-body {}
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 400;
+      color: var(--ink); margin-bottom: 6px;
+    }
+    .step-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+
+    /* Right side: Cases / results */
+    .cases-list { margin-top: 44px; display: flex; flex-direction: column; gap: 16px; }
+    .case-card {
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 22px 24px;
+      transition: border-color var(--tr), transform var(--tr), box-shadow var(--tr);
+    }
+    .case-card:hover {
+      border-color: var(--teal);
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px rgba(0,201,167,0.08);
+    }
+    .case-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .case-tag {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 20px;
+    }
+    .case-title {
+      font-family: var(--font-display);
+      font-size: 17px; font-weight: 400;
+      color: var(--ink); margin-bottom: 6px; line-height: 1.3;
+    }
+    .case-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+    .case-result {
+      margin-top: 12px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; color: var(--teal);
+    }
+    .case-result::before {
+      content: ''; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* ============================================
+       TESTIMONIOS
+    ============================================ */
+    #testimonios {
+      padding: var(--py) 0;
+      background: var(--paper);
+    }
+    .test-header { margin-bottom: 60px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .test-header-left {}
+    .test-header-right { font-size: 13px; color: var(--ink-soft); }
+
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .test-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 32px 30px;
+      transition: border-color var(--tr), transform var(--tr), box-shadow var(--tr);
+    }
+    .test-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,201,167,0.07);
+    }
+    .test-card.dark {
+      background: var(--ink); border-color: var(--ink);
+    }
+    .test-card.dark:hover { border-color: var(--teal); }
+
+    .tc-area-tag {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+      margin-bottom: 18px; display: inline-block;
+    }
+    .tc-quote {
+      font-family: var(--font-display);
+      font-size: 56px; color: var(--teal);
+      line-height: 0.4; margin-bottom: 14px;
+      display: block; opacity: 0.4;
+    }
+    .test-card.dark .tc-quote { opacity: 0.7; }
+    .tc-text {
+      font-size: 15px; font-weight: 400; font-style: italic;
+      color: var(--ink-soft); line-height: 1.75; margin-bottom: 24px;
+    }
+    .test-card.dark .tc-text { color: rgba(255,255,255,0.55); }
+    .tc-author { display: flex; align-items: center; gap: 12px; }
+    .tc-av {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 14px;
+      font-weight: 700; color: var(--ink); flex-shrink: 0;
+    }
+    .tc-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .test-card.dark .tc-name { color: var(--white); }
+    .tc-role { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+    .test-card.dark .tc-role { color: rgba(255,255,255,0.35); }
+
+    /* ============================================
+       AGENDA
+    ============================================ */
+    #agenda {
+      padding: var(--py) 0;
+      background: var(--white);
+    }
+    #agenda .container {
+      display: grid; grid-template-columns: 380px 1fr;
+      gap: 80px; align-items: start;
+    }
+    .agenda-sticky { position: sticky; top: 86px; }
+
+    .agenda-benefits { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+    .agb {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; background: var(--paper);
+      border-radius: 4px; border-left: 3px solid var(--teal);
+      transition: background var(--tr);
+    }
+    .agb:hover { background: var(--teal-pale); }
+    .agb svg { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+    .agb p { font-size: 14px; color: var(--ink-soft); line-height: 1.5; }
+
+    .agenda-contact {
+      margin-top: 32px; padding: 24px;
+      background: var(--ink); border-radius: 6px;
+    }
+    .ac-head { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+    .ac-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+    .ac-item svg { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+    .ac-item span { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+    .calendly-wrapper {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+    }
+
+    /* ============================================
+       CTA BANNER — TEAL
+    ============================================ */
+    #cta-banner {
+      padding: 100px 0;
+      background: var(--ink);
+      position: relative; overflow: hidden; text-align: center;
+    }
+    #cta-banner::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse, rgba(0,201,167,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    #cta-banner .container { position: relative; z-index: 1; }
+
+    .cta-pre {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 28px;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 300; letter-spacing: -0.03em;
+      color: var(--white); line-height: 1.0;
+      margin-bottom: 28px;
+    }
+    .cta-title em { font-style: italic; color: var(--teal); }
+    .cta-sub { font-size: 16px; color: rgba(255,255,255,0.45); margin-bottom: 44px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: #09090A;
+      padding: 80px 0 36px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .ft-top {
+      display: grid; grid-template-columns: 2.2fr 1fr 1fr 1.2fr;
+      gap: 60px; padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 36px;
+    }
+    .ft-brand {}
+    .ft-logo {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 700;
+      letter-spacing: -0.04em; color: var(--white);
+      margin-bottom: 4px; display: flex; align-items: center; gap: 6px;
+    }
+    .ft-logo .tl { color: var(--teal); }
+    .ft-tagline { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 18px; }
+    .ft-desc { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.3); line-height: 1.8; max-width: 260px; }
+    .ft-memberships { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .ft-member-item { display: flex; align-items: center; gap: 8px; }
+    .ft-member-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+    .ft-member-text { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+    .ft-col-title { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 22px; }
+    .ft-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .ft-links a { font-size: 13px; color: rgba(255,255,255,0.3); transition: color 0.25s; }
+    .ft-links a:hover { color: rgba(255,255,255,0.75); }
+
+    .ft-contact-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+    .ft-contact-item svg { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+    .ft-contact-item span { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.6; }
+
+    .ft-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .ft-copy { font-size: 12px; color: rgba(255,255,255,0.15); }
+    .ft-legal { display: flex; gap: 24px; }
+    .ft-legal a { font-size: 12px; color: rgba(255,255,255,0.15); transition: color 0.25s; }
+    .ft-legal a:hover { color: rgba(255,255,255,0.45); }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+    ============================================ */
+    .reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+    .d5 { transition-delay: 0.5s; }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 1100px) {
+      :root { --py: 80px; }
+      .container { padding: 0 32px; }
+      nav { padding: 0 32px; }
+      .hero-top-bar, .hero-main, .hero-marquee-strip { padding-left: 32px; padding-right: 32px; }
+      .hero-l-mark { display: none; }
+
+      .hero-main { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+
+      .cap-grid { grid-template-columns: 1fr; }
+      .cap-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .cap-item:last-child { border-bottom: none; }
+
+      #firma .container { grid-template-columns: 1fr; }
+
+      .srv-mega-grid { grid-template-columns: repeat(2, 1fr); }
+      .srv-item.featured { grid-column: span 2; }
+      .servicios-top { grid-template-columns: 1fr; }
+
+      #proceso { grid-template-columns: 1fr; }
+      .proceso-left, .proceso-right { padding: 60px 32px; }
+
+      .test-grid { grid-template-columns: 1fr 1fr; }
+
+      #agenda .container { grid-template-columns: 1fr; }
+      .agenda-sticky { position: static; }
+
+      .ft-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --py: 60px; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .container { padding: 0 20px; }
+      .hero-top-bar, .hero-main, .hero-marquee-strip { padding-left: 20px; padding-right: 20px; }
+
+      .hero-kpis { gap: 24px; flex-wrap: wrap; }
+
+      .srv-mega-grid { grid-template-columns: 1fr; }
+      .srv-item.featured { grid-column: span 1; }
+
+      .test-grid { grid-template-columns: 1fr; }
+      .test-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+      .ft-top { grid-template-columns: 1fr; }
+      .ft-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =================== NAVIGATION =================== -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-wordmark" aria-label="Legallier">
+      <span class="teal-dot"></span>Legallier
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#firma">La Firma</a></li>
+      <li><a href="#servicios">Práctica</a></li>
+      <li><a href="#proceso">Casos</a></li>
+      <li><a href="#testimonios">Clientes</a></li>
+      <li><a href="#agenda" class="nav-cta">Consulta Inicial</a></li>
+    </ul>
+
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#firma" onclick="closeMobileNav()">La Firma</a>
+    <a href="#servicios" onclick="closeMobileNav()">Práctica</a>
+    <a href="#proceso" onclick="closeMobileNav()">Casos</a>
+    <a href="#testimonios" onclick="closeMobileNav()">Clientes</a>
+    <a href="#agenda" onclick="closeMobileNav()">Consulta Inicial →</a>
+  </div>
+
+
+  <!-- =================== HERO =================== -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-l-mark">L</div>
+
+    <!-- Top info bar -->
+    <div class="hero-top-bar">
+      <div class="htb-left">Legallier · Derecho Corporativo & Propiedad Intelectual · Est. 2011</div>
+      <div class="htb-right">
+        <div class="htb-pill active">Monterrey</div>
+        <div class="htb-pill active">CDMX</div>
+        <div class="htb-pill">New York (Corresponsales)</div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="hero-main">
+      <div class="hero-left">
+        <div class="hero-tagline">Boutique · IP & Corporate · México</div>
+
+        <h1 class="hero-heading">
+          Su marca.<br>
+          <em>Su empresa.</em>
+          <strong>Protegidas.</strong>
+        </h1>
+
+        <p class="hero-desc">
+          Firma boutique especializada en derecho corporativo y propiedad intelectual. Asesoramos a startups, empresas de tecnología, moda, entretenimiento y grupos corporativos en la protección de sus activos más valiosos.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#agenda" class="btn-teal">
+            <span>Agendar consulta</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#servicios" class="btn-ghost-dark">Ver práctica</a>
+        </div>
+
+        <div class="hero-kpis">
+          <div>
+            <div class="hkpi-val">12<span>+</span></div>
+            <div class="hkpi-label">Años de práctica especializada</div>
+          </div>
+          <div class="hkpi-sep"></div>
+          <div>
+            <div class="hkpi-val">800<span>+</span></div>
+            <div class="hkpi-label">Marcas registradas ante IMPI</div>
+          </div>
+          <div class="hkpi-sep"></div>
+          <div>
+            <div class="hkpi-val">200<span>+</span></div>
+            <div class="hkpi-label">Sociedades constituidas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero right: IP Dashboard mockup -->
+      <div class="hero-right">
+        <div style="position:relative;width:100%;max-width:480px;">
+          <div class="ip-mockup">
+            <div class="ipm-header">
+              <div class="ipm-dots">
+                <div class="ipm-dot" style="background:#E74C3C;"></div>
+                <div class="ipm-dot" style="background:#F39C12;"></div>
+                <div class="ipm-dot" style="background:#27AE60;"></div>
+              </div>
+              <div class="ipm-search"></div>
+              <div class="ipm-avatar"><span>LG</span></div>
+            </div>
+            <div class="ipm-body">
+              <div class="ipm-sidebar">
+                <div class="ipm-logo-mark"><span>L·</span></div>
+                <div class="ipm-nav-row active">
+                  <div class="ipm-nav-dot"></div><div class="ipm-nav-line"></div>
+                </div>
+                <div class="ipm-nav-row"><div class="ipm-nav-dot"></div><div class="ipm-nav-line"></div></div>
+                <div class="ipm-nav-row"><div class="ipm-nav-dot"></div><div class="ipm-nav-line"></div></div>
+                <div class="ipm-nav-row"><div class="ipm-nav-dot"></div><div class="ipm-nav-line"></div></div>
+                <div style="height:20px;"></div>
+                <div class="ipm-nav-row" style="background:rgba(0,201,167,0.06);">
+                  <div class="ipm-nav-dot" style="background:rgba(0,201,167,0.4);"></div>
+                  <div class="ipm-nav-line" style="background:rgba(0,201,167,0.3);width:50%;"></div>
+                </div>
+              </div>
+              <div class="ipm-main">
+                <div class="ipm-section-teal"></div>
+                <div class="ipm-section-label"></div>
+                <div class="ipm-cards">
+                  <!-- Trademark card -->
+                  <div class="ipm-card">
+                    <div class="ipm-card-top">
+                      <div class="ipm-card-icon" style="background:rgba(0,201,167,0.1);">
+                        <svg width="12" height="12" fill="none" stroke="#00C9A7" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                      </div>
+                      <div class="ipm-card-badge" style="background:rgba(0,201,167,0.15);color:#00C9A7;">Registrada</div>
+                    </div>
+                    <div class="ipm-card-lines">
+                      <div class="ipm-card-line" style="width:70%;background:rgba(255,255,255,0.15);"></div>
+                      <div class="ipm-card-line" style="width:50%;"></div>
+                    </div>
+                  </div>
+                  <!-- Patent card -->
+                  <div class="ipm-card">
+                    <div class="ipm-card-top">
+                      <div class="ipm-card-icon" style="background:rgba(251,191,36,0.1);">
+                        <svg width="12" height="12" fill="none" stroke="#FBB324" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                      </div>
+                      <div class="ipm-card-badge" style="background:rgba(251,191,36,0.15);color:#FBB324;">En trámite</div>
+                    </div>
+                    <div class="ipm-card-lines">
+                      <div class="ipm-card-line" style="width:55%;background:rgba(255,255,255,0.12);"></div>
+                      <div class="ipm-card-line" style="width:80%;"></div>
+                    </div>
+                  </div>
+                  <!-- Copyright card -->
+                  <div class="ipm-card">
+                    <div class="ipm-card-top">
+                      <div class="ipm-card-icon" style="background:rgba(139,92,246,0.1);">
+                        <svg width="12" height="12" fill="none" stroke="#8B5CF6" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                      </div>
+                      <div class="ipm-card-badge" style="background:rgba(139,92,246,0.15);color:#8B5CF6;">Vigente</div>
+                    </div>
+                    <div class="ipm-card-lines">
+                      <div class="ipm-card-line" style="width:65%;background:rgba(255,255,255,0.12);"></div>
+                      <div class="ipm-card-line" style="width:40%;"></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Progress bars -->
+                <div class="ipm-progress-row">
+                  <div class="ipm-progress-label">
+                    <span style="width:80px;background:rgba(255,255,255,0.1);"></span>
+                    <span style="width:30px;background:rgba(0,201,167,0.4);"></span>
+                  </div>
+                  <div class="ipm-bar"><div class="ipm-bar-fill" style="width:85%;background:var(--teal);"></div></div>
+                  <div class="ipm-bar"><div class="ipm-bar-fill" style="width:62%;background:rgba(251,191,36,0.6);"></div></div>
+                  <div class="ipm-bar"><div class="ipm-bar-fill" style="width:40%;background:rgba(139,92,246,0.5);"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating badges -->
+          <div class="hero-float-badge hfb-tl">
+            <div class="hfb-label">Marcas registradas</div>
+            <div class="hfb-teal">+800</div>
+            <div class="hfb-sub">ante IMPI · 2011–2025</div>
+          </div>
+          <div class="hero-float-badge hfb-br">
+            <div class="hfb-label">Tasa de éxito</div>
+            <div class="hfb-val">97<span style="font-size:14px;color:var(--teal);">%</span></div>
+            <div class="hfb-badge">
+              <svg width="8" height="8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+              en registros IMPI
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marquee strip -->
+    <div class="hero-marquee-strip">
+      <div class="marquee-track">
+        <div class="marquee-item">Registro de Marcas IMPI</div>
+        <div class="marquee-item">Fusiones y Adquisiciones</div>
+        <div class="marquee-item">Patentes y Modelos de Utilidad</div>
+        <div class="marquee-item">Derecho Corporativo</div>
+        <div class="marquee-item">Derechos de Autor</div>
+        <div class="marquee-item">Due Diligence</div>
+        <div class="marquee-item">Litigio IP ante IMPI</div>
+        <div class="marquee-item">Gobierno Corporativo</div>
+        <div class="marquee-item">Licencias & Franquicias</div>
+        <div class="marquee-item">Protección de Datos LFPDPPP</div>
+        <!-- Duplicate for seamless loop -->
+        <div class="marquee-item">Registro de Marcas IMPI</div>
+        <div class="marquee-item">Fusiones y Adquisiciones</div>
+        <div class="marquee-item">Patentes y Modelos de Utilidad</div>
+        <div class="marquee-item">Derecho Corporativo</div>
+        <div class="marquee-item">Derechos de Autor</div>
+        <div class="marquee-item">Due Diligence</div>
+        <div class="marquee-item">Litigio IP ante IMPI</div>
+        <div class="marquee-item">Gobierno Corporativo</div>
+        <div class="marquee-item">Licencias & Franquicias</div>
+        <div class="marquee-item">Protección de Datos LFPDPPP</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== CAPABILITIES =================== -->
+  <section id="capabilities">
+    <div class="cap-grid">
+      <div class="cap-item reveal">
+        <div class="cap-num">Práctica 01</div>
+        <div class="cap-title">Propiedad Intelectual</div>
+        <p class="cap-desc">Marcas, patentes, derechos de autor, secretos industriales y trade dress. Registro nacional e internacional (IMPI · OMPI · USPTO).</p>
+      </div>
+      <div class="cap-item reveal d1">
+        <div class="cap-num">Práctica 02</div>
+        <div class="cap-title">Derecho Corporativo</div>
+        <p class="cap-desc">Constitución y reestructura societaria, fusiones y adquisiciones, gobierno corporativo, contratos y due diligence para operaciones M&A.</p>
+      </div>
+      <div class="cap-item reveal d2">
+        <div class="cap-num">Práctica 03</div>
+        <div class="cap-title">Litigio & Enforcement</div>
+        <p class="cap-desc">Defensa ante IMPI, TFJFA, Tribunales Federales y SCJN. Medidas cautelares, acciones de infracción, nulidad y caducidad de derechos.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== FIRMA (ABOUT + SOCIOS) =================== -->
+  <section id="firma">
+    <div class="container">
+
+      <!-- Left: About -->
+      <div class="firma-content">
+        <div class="eyebrow reveal"><span></span>La Firma</div>
+        <h2 class="display-title reveal d1">
+          Boutique de<br>precisión <em>jurídica</em><br>para negocios<br><strong>que crean valor.</strong>
+        </h2>
+
+        <p class="firma-body reveal d2">
+          Legallier es una firma boutique fundada en 2011 con una convicción clara: la propiedad intelectual y la estructura corporativa no son trámites, son activos estratégicos. Asesoramos a empresas que comprenden que su marca, sus invenciones y su arquitectura societaria son la base de su ventaja competitiva.
+        </p>
+        <p class="firma-body reveal d3">
+          Nuestro equipo combina profundidad técnica en PI con visión de negocios. Somos miembros activos de AMPPI, INTA y AIPPI, con una red de corresponsales en más de 30 países que nos permite proteger los activos de nuestros clientes globalmente.
+        </p>
+
+        <div class="firma-numbers reveal d2">
+          <div class="fn-box">
+            <div class="fn-num">12<span>+</span></div>
+            <div class="fn-label">Años de práctica</div>
+          </div>
+          <div class="fn-box">
+            <div class="fn-num">97<span>%</span></div>
+            <div class="fn-label">Tasa de éxito IMPI</div>
+          </div>
+          <div class="fn-box">
+            <div class="fn-num">30<span>+</span></div>
+            <div class="fn-label">Países · Red global</div>
+          </div>
+          <div class="fn-box">
+            <div class="fn-num">3</div>
+            <div class="fn-label">Oficinas en México</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Partners -->
+      <div class="firma-team">
+        <h3 class="display-title reveal" style="font-size:32px;margin-bottom:8px;">
+          Nuestros <em>socios</em>
+        </h3>
+        <p class="body-text reveal d1" style="margin-top:0;margin-bottom:32px;">Cada socio aporta más de 10 años de práctica especializada.</p>
+
+        <div class="partner-card reveal d1">
+          <div class="partner-photo-wrap">
+            <img class="partner-photo"
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80&auto=format&fit=crop&crop=faces"
+              alt="Socio Fundador" />
+            <div class="partner-badge">Socio Fundador</div>
+          </div>
+          <div class="partner-info">
+            <div class="partner-name">Lic. Rodrigo Legall Ibáñez</div>
+            <div class="partner-title">IP · Litigio · Marcas</div>
+            <p class="partner-desc">Más de 15 años en propiedad industrial. Exfuncionario del IMPI. Litigante ante TFJFA, SCJN y tribunales federales. Especialista en marcas de moda y tecnología.</p>
+            <div class="partner-tags">
+              <span class="partner-tag">AMPPI</span>
+              <span class="partner-tag">INTA</span>
+              <span class="partner-tag">AIPPI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="partner-card reveal d2">
+          <div class="partner-photo-wrap">
+            <img class="partner-photo"
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80&auto=format&fit=crop&crop=faces"
+              alt="Socia Corporativa" />
+            <div class="partner-badge">Socia</div>
+          </div>
+          <div class="partner-info">
+            <div class="partner-name">Lic. Camila Torres Arévalo</div>
+            <div class="partner-title">Corporativo · M&A · Contratos</div>
+            <p class="partner-desc">MBA por IPADE. Experta en fusiones, adquisiciones y reestructuras corporativas. Asesora a grupos empresariales nacionales y fondos de private equity en transacciones complejas.</p>
+            <div class="partner-tags">
+              <span class="partner-tag">M&A</span>
+              <span class="partner-tag">Private Equity</span>
+              <span class="partner-tag">Gov. Corp.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="partner-card reveal d3">
+          <div class="partner-photo-wrap">
+            <img class="partner-photo"
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&q=80&auto=format&fit=crop&crop=faces"
+              alt="Socio Patentes" />
+            <div class="partner-badge">Socio</div>
+          </div>
+          <div class="partner-info">
+            <div class="partner-name">Ing. Lic. Diego Fuentes Mora</div>
+            <div class="partner-title">Patentes · Tecnología · Innovación</div>
+            <p class="partner-desc">Ingeniero en Electrónica y abogado. Especialista en patentes de software, hardware y biotecnología. Red de corresponsales técnicos en EU, Europa y Asia para protección PCT.</p>
+            <div class="partner-tags">
+              <span class="partner-tag">Patentes PCT</span>
+              <span class="partner-tag">USPTO</span>
+              <span class="partner-tag">EPO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =================== SERVICIOS — DARK =================== -->
+  <section id="servicios">
+    <div class="servicios-glow"></div>
+    <div class="container">
+      <div class="servicios-top">
+        <div>
+          <div class="eyebrow dark-bg reveal"><span></span>Áreas de práctica</div>
+          <h2 class="display-title on-dark reveal d1">
+            Protegemos lo que<br>su negocio <em>construyó.</em>
+          </h2>
+        </div>
+        <div>
+          <p class="body-text reveal d2" style="color:rgba(255,255,255,0.35);max-width:380px;">
+            Cubrimos el ciclo completo de la propiedad intelectual y el derecho corporativo: desde el registro hasta la defensa, desde la constitución hasta la transacción.
+          </p>
+        </div>
+      </div>
+
+      <div class="srv-mega-grid">
+
+        <!-- FEATURED: Marcas -->
+        <div class="srv-item featured reveal">
+          <div style="flex:1;">
+            <div class="srv-item-num">01 — Servicio Estrella</div>
+            <div class="srv-item-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
+            </div>
+            <div class="srv-item-name">Registro de Marcas</div>
+            <p class="srv-item-desc">Búsqueda de anterioridades, estrategia de clases, presentación ante IMPI, seguimiento y defensa. Registro nacional e internacional vía Madrid y OMPI. Vigilancia de marcas y alertas de infracción. Más de 800 marcas registradas con 97% de tasa de éxito.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;min-width:190px;">
+            <div style="background:rgba(0,201,167,0.08);border:1px solid rgba(0,201,167,0.2);border-radius:8px;padding:16px;">
+              <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,201,167,0.6);margin-bottom:6px;">Vigencia</div>
+              <div style="font-family:var(--font-display);font-size:22px;color:var(--teal);font-weight:300;">10 años</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">renovables indefinidamente</div>
+            </div>
+            <div style="background:rgba(0,201,167,0.05);border:1px solid rgba(0,201,167,0.1);border-radius:8px;padding:16px;">
+              <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,201,167,0.6);margin-bottom:6px;">Cobertura</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">México · USA<br>Unión Europea<br>+30 países</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="srv-item reveal d1">
+          <div class="srv-item-num">02</div>
+          <div class="srv-item-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          </div>
+          <div class="srv-item-name">Patentes y Modelos de Utilidad</div>
+          <p class="srv-item-desc">Búsqueda de arte previo, redacción de solicitudes, seguimiento ante IMPI y USPTO/EPO vía PCT. Estrategia de protección para invenciones de software, hardware y procesos industriales.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="srv-item reveal d2">
+          <div class="srv-item-num">03</div>
+          <div class="srv-item-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <div class="srv-item-name">Derechos de Autor</div>
+          <p class="srv-item-desc">Registro ante INDAUTOR de obras literarias, musicales, artísticas, software y bases de datos. Contratos de cesión, licencias y gestión de royalties. Reservas de derechos.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="srv-item reveal d1">
+          <div class="srv-item-num">04</div>
+          <div class="srv-item-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="srv-item-name">Derecho Corporativo</div>
+          <p class="srv-item-desc">Constitución de SA de CV, SAPI, SAS y SC. Reestructuras societarias, asambleas, actualización de estatutos y gobierno corporativo para grupos empresariales nacionales y filiales de corporativos internacionales.</p>
+        </div>
+
+        <!-- 5 -->
+        <div class="srv-item reveal d2">
+          <div class="srv-item-num">05</div>
+          <div class="srv-item-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div class="srv-item-name">Fusiones y Adquisiciones</div>
+          <p class="srv-item-desc">Estructuración, negociación y cierre de operaciones M&A. Due diligence legal, fiscal y de PI. Redacción de LOI, SPA y demás documentación transaccional. Acompañamiento pre y post-closing.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="srv-item reveal d3">
+          <div class="srv-item-num">06</div>
+          <div class="srv-item-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+          </div>
+          <div class="srv-item-name">Litigio de PI</div>
+          <p class="srv-item-desc">Procedimientos de infracción, nulidad y caducidad ante IMPI. Recursos de revisión, juicios ante TFJFA, amparos directos e indirectos. Medidas cautelares y acciones penales por piratería.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="srv-item reveal d1">
+          <div class="srv-item-num">07</div>
+          <div class="srv-item-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="srv-item-name">Contratos Corporativos</div>
+          <p class="srv-item-desc">Contratos de licencia, franquicia, distribución, joint venture, servicios tecnológicos, NDA y codesarrollo. Negociación y revisión con visión de negocio y protección de activos intangibles.</p>
+        </div>
+
+        <!-- 8 -->
+        <div class="srv-item reveal d2">
+          <div class="srv-item-num">08</div>
+          <div class="srv-item-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <div class="srv-item-name">Secretos Industriales & Trade Dress</div>
+          <p class="srv-item-desc">Estrategias de protección de know-how, información confidencial y apariencia comercial. Políticas internas, acuerdos de confidencialidad, auditorías de activos intangibles y valoración de portafolio de PI.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== PROCESO (SPLIT) + CASOS =================== -->
+  <section id="proceso">
+
+    <!-- Left: Process -->
+    <div class="proceso-left">
+      <div class="eyebrow reveal"><span></span>Metodología</div>
+      <h2 class="display-title reveal d1" style="font-size:clamp(30px,3.5vw,46px);">
+        Precisión<br>desde el<br><em>día uno.</em>
+      </h2>
+
+      <div class="step-list">
+        <div class="step-row reveal d1">
+          <div class="step-idx">01</div>
+          <div class="step-body">
+            <div class="step-title">Diagnóstico estratégico</div>
+            <p class="step-desc">Evaluamos el portafolio actual de PI y la estructura societaria. Identificamos riesgos, oportunidades de protección y brechas de cobertura antes de recomendar cualquier acción.</p>
+          </div>
+        </div>
+        <div class="step-row reveal d2">
+          <div class="step-idx">02</div>
+          <div class="step-body">
+            <div class="step-title">Estrategia personalizada</div>
+            <p class="step-desc">Diseñamos un plan de protección que considera jurisdicciones, clases de niza, presupuesto y cronograma. Sin soluciones genéricas, cada cliente requiere una estrategia propia.</p>
+          </div>
+        </div>
+        <div class="step-row reveal d3">
+          <div class="step-idx">03</div>
+          <div class="step-body">
+            <div class="step-title">Ejecución y seguimiento</div>
+            <p class="step-desc">Gestionamos cada trámite con transparencia total. Actualizaciones proactivas, sin que el cliente tenga que preguntar. Acceso a portal de seguimiento en tiempo real.</p>
+          </div>
+        </div>
+        <div class="step-row reveal d4">
+          <div class="step-idx">04</div>
+          <div class="step-body">
+            <div class="step-title">Defensa y mantenimiento</div>
+            <p class="step-desc">El registro es el inicio. Monitoreamos el mercado y las gacetas del IMPI para detectar conflictos. Actuamos de inmediato ante cualquier infracción o imitación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Cases -->
+    <div class="proceso-right">
+      <div class="eyebrow reveal"><span></span>Casos Recientes</div>
+      <h2 class="display-title reveal d1" style="font-size:clamp(30px,3.5vw,46px);">
+        Resultados<br>que<br><em>hablan.</em>
+      </h2>
+
+      <div class="cases-list">
+        <div class="case-card reveal d1">
+          <div class="case-header">
+            <div class="case-tag" style="background:var(--teal-pale);color:var(--teal-dark);">Marcas</div>
+            <div style="font-size:11px;color:var(--ink-soft);">2024</div>
+          </div>
+          <div class="case-title">Declaración de Marca Notoria ante IMPI</div>
+          <p class="case-desc">Obtuvimos la declaratoria de marca notoria para una cadena de restaurantes regional, otorgando protección ampliada en todas las clases sin necesidad de registro específico por clase.</p>
+          <div class="case-result">Resolución favorable · 8 meses de gestión</div>
+        </div>
+
+        <div class="case-card reveal d2">
+          <div class="case-header">
+            <div class="case-tag" style="background:#F3F0FA;color:#6B4FA0;">M&A</div>
+            <div style="font-size:11px;color:var(--ink-soft);">2024</div>
+          </div>
+          <div class="case-title">Due Diligence de PI — Adquisición tecnológica</div>
+          <p class="case-desc">Coordinamos el análisis de un portafolio de 140 activos de PI (marcas, patentes y secretos industriales) en el contexto de una adquisición por USD 45M en el sector fintech.</p>
+          <div class="case-result">Operación cerrada · Sin contingencias de PI</div>
+        </div>
+
+        <div class="case-card reveal d3">
+          <div class="case-header">
+            <div class="case-tag" style="background:#E0F0FF;color:#1D6FA4;">Litigio</div>
+            <div style="font-size:11px;color:var(--ink-soft);">2025</div>
+          </div>
+          <div class="case-title">Infracción de Trade Dress — Industria de moda</div>
+          <p class="case-desc">Representamos a diseñadora mexicana en procedimiento de infracción por copia de imagen comercial. Medidas cautelares obtenidas en 72 horas. Resolución favorable con daños y perjuicios.</p>
+          <div class="case-result">Medidas cautelares en 72 hrs · Daños reconocidos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== TESTIMONIOS =================== -->
+  <section id="testimonios">
+    <div class="container">
+      <div class="test-header">
+        <div>
+          <div class="eyebrow reveal"><span></span>Clientes</div>
+          <h2 class="display-title reveal d1">Lo que dicen<br>quienes <em>confían</em><br>en Legallier</h2>
+        </div>
+        <div class="test-header-right reveal d2">
+          Trabajamos con startups, marcas establecidas<br>y corporativos internacionales con presencia en México.
+        </div>
+      </div>
+
+      <div class="test-grid">
+
+        <div class="test-card reveal">
+          <div class="tc-area-tag" style="background:var(--teal-pale);color:var(--teal-dark);">Registro de Marcas</div>
+          <span class="tc-quote">"</span>
+          <p class="tc-text">Intentamos registrar nuestra marca por cuenta propia y nos la rechazaron. Legallier tomó el caso, identificó el conflicto de anterioridad y lo resolvió con una estrategia que nunca hubiéramos pensado. En 6 meses teníamos el título. Hoy son nuestros abogados de cabecera.</p>
+          <div class="tc-author">
+            <div class="tc-av" style="background:var(--teal);">AV</div>
+            <div>
+              <div class="tc-name">Andrea Vidal Cruz</div>
+              <div class="tc-role">CEO · Kinema Studio · CDMX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card dark reveal d1">
+          <div class="tc-area-tag" style="background:rgba(0,201,167,0.12);color:var(--teal);">Fusiones & Adquisiciones</div>
+          <span class="tc-quote">"</span>
+          <p class="tc-text">Legallier coordinó el due diligence de nuestra adquisición más compleja hasta la fecha. Identificaron riesgos de PI que otros despachos habían pasado por alto. Su claridad y velocidad de respuesta marcaron la diferencia para cerrar en tiempo.</p>
+          <div class="tc-author">
+            <div class="tc-av" style="background:var(--teal);color:var(--ink);">PM</div>
+            <div>
+              <div class="tc-name">Pablo Méndez Solís</div>
+              <div class="tc-role">Managing Director · Nortem Capital</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal d2">
+          <div class="tc-area-tag" style="background:#F3F0FA;color:#6B4FA0;">Patentes</div>
+          <span class="tc-quote">"</span>
+          <p class="tc-text">Diego Fuentes entiende tanto de tecnología como de derecho. Para nuestra startup de hardware, esa combinación es invaluable. Nos ayudó a construir una estrategia de patentes PCT que hoy protege nuestra invención en 12 países. Altamente recomendable.</p>
+          <div class="tc-author">
+            <div class="tc-av" style="background:#8B5CF6;">IG</div>
+            <div>
+              <div class="tc-name">Iván González Peña</div>
+              <div class="tc-role">CTO & Cofundador · Helix Robotics</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== AGENDA =================== -->
+  <section id="agenda">
+    <div class="container">
+
+      <!-- Left: Info -->
+      <div class="agenda-sticky reveal">
+        <div class="eyebrow"><span></span>Consulta inicial</div>
+        <h2 class="display-title" style="font-size:clamp(30px,4vw,50px);">
+          Hablemos de<br>sus <em>activos</em><br>intangibles.
+        </h2>
+        <p class="body-text" style="margin-top:16px;max-width:320px;">
+          30 minutos para entender su situación y compartir una perspectiva estratégica honesta. Sin compromisos previos.
+        </p>
+
+        <div class="agenda-benefits">
+          <div class="agb">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p>Diagnóstico inicial de su portafolio de PI sin costo</p>
+          </div>
+          <div class="agb">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <p>Atención directa con el socio especialista en su área</p>
+          </div>
+          <div class="agb">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <p>Total confidencialidad garantizada desde el primer contacto</p>
+          </div>
+          <div class="agb">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p>Opción presencial, videollamada o llamada telefónica</p>
+          </div>
+          <div class="agb">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <p>Respuesta en menos de 24 horas hábiles</p>
+          </div>
+        </div>
+
+        <div class="agenda-contact">
+          <div class="ac-head">Contacto directo</div>
+          <div class="ac-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span>(81) 9988 - 7766</span>
+          </div>
+          <div class="ac-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>hola@legallier.mx</span>
+          </div>
+          <div class="ac-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+            <span>Av. Fundidora 501, Of. 32<br>Monterrey, N.L. · CDMX</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Calendly -->
+      <div class="reveal d2">
+        <div class="calendly-wrapper">
+          <!-- Calendly inline widget begin -->
+          <div class="calendly-inline-widget" data-url="https://calendly.com/consultas-werfurther/30min" style="min-width:320px;height:700px;"></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <!-- Calendly inline widget end -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =================== CTA BANNER =================== -->
+  <section id="cta-banner">
+    <div class="container">
+      <div class="cta-pre reveal">Legallier · Boutique de PI & Corporativo</div>
+      <h2 class="cta-title reveal d1">
+        Su marca merece<br>un despacho que<br><em>entiende su valor.</em>
+      </h2>
+      <p class="cta-sub reveal d2">
+        No espere a que alguien registre su marca primero o copie su producto. La protección legal que no existe hoy, mañana puede costar mucho más.
+      </p>
+      <div class="cta-btns reveal d3">
+        <a href="#agenda" class="btn-teal">
+          <span>Agendar consulta ahora</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#servicios" class="btn-ghost-dark">Ver servicios →</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== FOOTER =================== -->
+  <footer>
+    <div class="container">
+      <div class="ft-top">
+        <div class="ft-brand">
+          <div class="ft-logo">
+            <span class="tl">·</span>Legallier
+          </div>
+          <div class="ft-tagline">Derecho Corporativo & Propiedad Intelectual</div>
+          <p class="ft-desc">
+            Firma boutique de PI y corporativo fundada en 2011. Monterrey, CDMX y red global de corresponsales en +30 países.
+          </p>
+          <div class="ft-memberships">
+            <div class="ft-member-item"><div class="ft-member-dot"></div><div class="ft-member-text">AMPPI — Asoc. Mexicana para la Protección de la PI</div></div>
+            <div class="ft-member-item"><div class="ft-member-dot"></div><div class="ft-member-text">INTA — International Trademark Association</div></div>
+            <div class="ft-member-item"><div class="ft-member-dot"></div><div class="ft-member-text">AIPPI — Asoc. Internacional para la Protección de la PI</div></div>
+            <div class="ft-member-item"><div class="ft-member-dot"></div><div class="ft-member-text">Barra Mexicana — Colegio de Abogados</div></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="ft-col-title">Práctica</div>
+          <ul class="ft-links">
+            <li><a href="#servicios">Registro de Marcas</a></li>
+            <li><a href="#servicios">Patentes y Modelos</a></li>
+            <li><a href="#servicios">Derechos de Autor</a></li>
+            <li><a href="#servicios">Derecho Corporativo</a></li>
+            <li><a href="#servicios">Fusiones y Adquisiciones</a></li>
+            <li><a href="#servicios">Litigio de PI</a></li>
+            <li><a href="#servicios">Contratos Corporativos</a></li>
+            <li><a href="#servicios">Secretos Industriales</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="ft-col-title">La Firma</div>
+          <ul class="ft-links">
+            <li><a href="#firma">Nosotros</a></li>
+            <li><a href="#firma">Socios</a></li>
+            <li><a href="#proceso">Metodología</a></li>
+            <li><a href="#proceso">Casos recientes</a></li>
+            <li><a href="#testimonios">Clientes</a></li>
+            <li><a href="#agenda">Consulta inicial</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="ft-col-title">Contacto</div>
+          <div class="ft-contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Av. Fundidora 501, Of. 32<br>Monterrey, N.L.</span>
+          </div>
+          <div class="ft-contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Campos Elíseos 400, Piso 12<br>Ciudad de México</span>
+          </div>
+          <div class="ft-contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span>(81) 9988 - 7766</span>
+          </div>
+          <div class="ft-contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>hola@legallier.mx</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ft-bottom">
+        <p class="ft-copy">© 2025 Legallier, S.C. · Todos los derechos reservados.</p>
+        <div class="ft-legal">
+          <a href="#">Aviso de Privacidad</a>
+          <a href="#">Términos de Uso</a>
+          <a href="#">Conflictos de Interés</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- =================== JS =================== -->
+  <script>
+    /* --- Navbar --- */
+    const navbar = document.getElementById('navbar');
+    navbar.classList.add('scrolled'); // always dark
+    window.addEventListener('scroll', () => {
+      // stays dark always; just update if needed
+    }, { passive: true });
+
+    /* --- Mobile nav --- */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav    = document.getElementById('mobileNav');
+    hamburgerBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+    function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+    /* --- Scroll reveal --- */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left');
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+    revealEls.forEach(el => revObs.observe(el));
+
+    /* --- Hero entrance --- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const hl = document.querySelector('.hero-left');
+      if (!hl) return;
+      hl.style.cssText += 'opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease;';
+      setTimeout(() => { hl.style.opacity = '1'; hl.style.transform = 'translateY(0)'; }, 120);
+    });
+  </script>
+
+</body>
+</html>
